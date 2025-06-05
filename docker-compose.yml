@@ -1,0 +1,48 @@
+
+
+services:
+  app:
+    image: my-laravel-app
+    container_name: laravel-app
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    volumes:
+      - ./laravel:/var/www/html
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - appnet
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+    volumes:
+      - ./laravel.sql:/docker-entrypoint-initdb.d/laravel.sql
+    networks:
+      - appnet
+
+  node:
+    image: node:18
+    working_dir: /var/www/html
+    volumes:
+      - ./laravel:/var/www/html
+    command: tail -f /dev/null
+    networks:
+      - appnet
+
+networks:
+  appnet:
