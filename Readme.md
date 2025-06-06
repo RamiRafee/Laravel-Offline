@@ -112,7 +112,7 @@ Docker needs virtualization support enabled in your computer’s BIOS/UEFI setti
 
 ---
 # 💡 Another Method with UsbWebServer (Not Recomended)
-**PowerShell 7 Installer (Optional)**  
+**UsbWebServer Official Manual**  
   [Read UsbWebServer Official Manual](https://www.usbwebserver.net/downloads/manual.pdf)
 
 If you encounter any issues, please verify Docker installation and virtualization settings before troubleshooting the project.
